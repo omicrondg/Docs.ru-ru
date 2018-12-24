@@ -16,11 +16,11 @@ ms.locfileid: "50968336"
 
 Автор: [Рик Андерсон](https://twitter.com/RickAndMSFT) (Rick Anderson)
 
-Удостоверение ASP.NET Core — это система членства, который расширяет функциональные возможности входа для приложений ASP.NET Core. Пользователи могут создавать учетную запись входа сведений, хранящихся в удостоверении или они могут использовать внешнего поставщика входа. Поставщики поддерживаемых внешней учетной записи включают [Facebook, Google, учетной записи Майкрософт и Twitter](xref:security/authentication/social/index).
+Удостоверение ASP.NET Core — это система членства, которая расширяет функциональные возможности входа для приложений ASP.NET Core. Пользователи могут создавать учетную запись входа сведений, хранящихся в удостоверении или они могут использовать внешнего поставщика входа. Поставщики поддерживаемых внешней учетной записи включают [Facebook, Google, учетной записи Майкрософт и Twitter](xref:security/authentication/social/index).
 
-Удостоверений можно настроить с помощью базы данных SQL Server для хранения имен пользователей, пароли и данные профиля. Кроме того других постоянных хранилищах можно использовать, например, хранилище таблиц Azure.
+Удостоверение можно настроить с помощью базы данных SQL Server для хранения имен пользователей, пароли и данные профиля. Кроме того, можно использовать и другие постоянные хранилища, например, хранилище таблиц Azure.
 
-[Представление или скачать образец кода](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([загрузке)](xref:index#how-to-download-a-sample)).
+[Просмотреть или скачать образец кода](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) ([загрузке)](xref:index#how-to-download-a-sample)).
 
 В этом разделе сведения об использовании идентификаторов регистрация, вход и выход пользователя. Более подробные инструкции по созданию приложений, использующих удостоверения см. в разделе "Дальнейшие действия" в конце этой статьи.
 
@@ -60,9 +60,9 @@ dotnet new webapp --auth Individual -o WebApp1
 
 Созданный проект предоставляет [удостоверения ASP.NET Core](xref:security/authentication/identity) как [библиотеки классов Razor](xref:razor-pages/ui-class).
 
-### <a name="test-register-and-login"></a>Тест регистра и имени входа
+### <a name="test-register-and-login"></a>Тест регистрации и входа
 
-Запустите приложение и регистрации пользователя. Зависимости от размера экрана, может потребоваться выбрать кнопки-переключателя навигации для просмотра **зарегистрировать** и **входа** ссылки.
+Запустите приложение и зарегистрируйте пользователя. В зависимости от размера экрана, может потребоваться выбрать кнопки-переключателя навигации для просмотра **Регистрация** и **Вход** ссылки.
 
 ![выключатель переходов.](identity/_static/navToggle.png)
 
@@ -131,11 +131,11 @@ PowerShell используется точка с запятой в качест
 
 ---
 
-### <a name="examine-register"></a>Проверьте регистр
+### <a name="examine-register"></a>Проверьте регистрацию
 
 ::: moniker range=">= aspnetcore-2.1"
 
-   Когда пользователь щелкает **зарегистрировать** ссылку, `RegisterModel.OnPostAsync` вызова действия. Пользователь создается путем [CreateAsync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) на `_userManager` объекта. `_userManager` предоставляется с помощью внедрения зависимостей):
+   Когда пользователь щелкает ссылку **зарегистрировать**, вызоывается действие `RegisterModel.OnPostAsync`. Пользователь создается путем [CreateAsync](/dotnet/api/microsoft.aspnetcore.identity.usermanager-1.createasync#Microsoft_AspNetCore_Identity_UserManager_1_CreateAsync__0_System_String_) на `_userManager` объекта. `_userManager` предоставляется с помощью внедрения зависимостей):
 
    [!code-csharp[](identity/sample/src/ASPNETv2.1-IdentityDemo/Register.cshtml.cs?name=snippet&highlight=7,22)]
 
@@ -153,13 +153,13 @@ PowerShell используется точка с запятой в качест
 
    **Примечание.** Раздел [подтверждение учетной записи](xref:security/authentication/accconfirm#prevent-login-at-registration) описывает, как предотвратить автоматический вход пользователя при регистрации.
 
-### <a name="log-in"></a>Войти
+### <a name="log-in"></a>Вход
 
 ::: moniker range=">= aspnetcore-2.1"
 
 Форма входа отображается при:
 
-* **Вход** выбора ссылки.
+* Выбор ссылки **Вход**.
 * Пользователь пытается получить доступ к странице с ограниченным доступом, они не авторизованы для доступа к **или** если они еще не прошел проверку подлинности в системе.
 
 При отправке формы на странице входа, `OnPostAsync` вызова действия. `PasswordSignInAsync` вызывается для `_signInManager` объекта (предоставляется с помощью внедрения зависимостей).
@@ -190,7 +190,7 @@ PowerShell используется точка с запятой в качест
 
 [!code-csharp[](identity/sample/src/ASPNETv2.1-IdentityDemo/Logout.cshtml.cs)]
 
-[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) удаляет файл cookie утверждения пользователя. Не перенаправления после вызова метода `SignOutAsync` или пользователь будет **не** выполнен выход.
+[SignOutAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.signoutasync#Microsoft_AspNetCore_Identity_SignInManager_1_SignOutAsync) удаляет файл cookie утверждения пользователя. Не происходит перенаправления после вызова метода `SignOutAsync` или выход пользователя **не** будет выполнен.
 
 POST указывается в *Pages/Shared/_LoginPartial.cshtml*:
 
@@ -208,17 +208,17 @@ POST указывается в *Pages/Shared/_LoginPartial.cshtml*:
 
 ::: moniker-end
 
-## <a name="test-identity"></a>Проверить идентификатор
+## <a name="test-identity"></a>Проверить идентификацию
 
 Шаблоны веб-проектов по умолчанию разрешает анонимный доступ к домашней страницы. Чтобы проверить тождество, добавьте [ `[Authorize]` ](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) на страницу About.
 
 [!code-csharp[](identity/sample/src/ASPNETv2.1-IdentityDemo/About.cshtml.cs)]
 
-Если вы вошли, выйдите из системы. Запустите приложение и выберите **о** ссылку. Вы будете перенаправлены на страницу входа.
+Если вы вошли, выйдите из системы. Запустите приложение и выберите **о**(About) ссылку. Вы будете перенаправлены на страницу входа.
 
 ::: moniker range=">= aspnetcore-2.1"
 
-### <a name="explore-identity"></a>Изучите удостоверений
+### <a name="explore-identity"></a>Изучите идентификацию
 
 Для просмотра идентификации, более подробно:
 
@@ -227,11 +227,11 @@ POST указывается в *Pages/Shared/_LoginPartial.cshtml*:
 
 ::: moniker-end
 
-## <a name="identity-components"></a>Компонентами системы идентификации
+## <a name="identity-components"></a>Компоненты системы идентификации
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Все удостоверения зависимые пакеты NuGet, включаются в [метапакет Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app).
+Все зависимые пакеты NuGet для Идентификации, включаются в [метапакет Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app).
 
 ::: moniker-end
 
@@ -243,7 +243,7 @@ POST указывается в *Pages/Shared/_LoginPartial.cshtml*:
 
 ## <a name="setting-password-strength"></a>Стойкость пароля параметр
 
-См. в разделе [конфигурации](#pw) пример, задает минимальное паролей.
+См. в разделе [конфигурации](#pw) пример, задает минимальные требования для паролей.
 
 ## <a name="next-steps"></a>Следующие шаги
 
